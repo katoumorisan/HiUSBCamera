@@ -30,8 +30,6 @@ import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 
-import com.serenegiant.usb.USBMonitor.UsbControlBlock;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -124,7 +122,7 @@ public class UVCCamera {
 		}
 	}
 
-	private UsbControlBlock mCtrlBlock;
+	private USBMonitor.UsbControlBlock mCtrlBlock;
     protected long mControlSupports;			// カメラコントロールでサポートしている機能フラグ
     protected long mProcSupports;				// プロセッシングユニットでサポートしている機能フラグ
     protected int mCurrentFrameFormat = FRAME_FORMAT_MJPEG;
@@ -186,7 +184,7 @@ public class UVCCamera {
      * USB permission is necessary before this method is called
      * @param ctrlBlock
      */
-    public synchronized void open(final UsbControlBlock ctrlBlock) {
+    public synchronized void open(final USBMonitor.UsbControlBlock ctrlBlock) {
     	int result = -2;
 		StringBuilder sb = new StringBuilder();
     	try {
@@ -273,7 +271,7 @@ public class UVCCamera {
 		return mCtrlBlock != null ? mCtrlBlock.getDeviceName() : null;
 	}
 
-	public UsbControlBlock getUsbControlBlock() {
+	public USBMonitor.UsbControlBlock getUsbControlBlock() {
 		return mCtrlBlock;
 	}
 
@@ -1025,7 +1023,7 @@ public class UVCCamera {
     	}
     }
 
-	private final String getUSBFSName(final UsbControlBlock ctrlBlock) {
+	private final String getUSBFSName(final USBMonitor.UsbControlBlock ctrlBlock) {
 		String result = null;
 		final String name = ctrlBlock.getDeviceName();
 		final String[] v = !TextUtils.isEmpty(name) ? name.split("/") : null;

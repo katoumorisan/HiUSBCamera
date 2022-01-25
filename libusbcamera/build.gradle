@@ -27,20 +27,19 @@ android {
         sourceCompatibility rootProject.ext.javaSourceCompatibility
         targetCompatibility rootProject.ext.javaTargetCompatibility
     }
-
-//    repositories {
-//        flatDir {
-//            dirs 'libs'
-//        }
-//    }
 }
 
-
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
+//    api fileTree(dir: 'libs', include: ['*.jar','*.arr'])
+//    compile(name: 'common-4.1.1', ext: 'aar')
 
+    //    compile("com.serenegiant:common:${commonLibVersion}") {
+//        exclude module: 'support-v4'
+//    }
+
+//    implementation fileTree(include: ['*.jar'], dir: '../aars')
     implementation "androidx.appcompat:appcompat:${androidXVersion}"
-
-//    implementation(name: 'libusbcommon_v4.1.1', ext: 'aar')
+//    api "com.serenegiant:common:${commonLibVersion}"
+//    implementation(name:'common-4.1.1', ext:'aar')
     implementation 'com.github.my11712:serenegiant-common:V4.1.1'
 }

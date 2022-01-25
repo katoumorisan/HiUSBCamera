@@ -174,6 +174,7 @@ public final class USBMonitor {
 			if (DEBUG) Log.i(TAG, "register:");
 			final Context context = mWeakContext.get();
 			if (context != null) {
+				Log.i(TAG, "register:in");
 				mPermissionIntent = PendingIntent.getBroadcast(context, 0, new Intent(ACTION_USB_PERMISSION), 0);
 				final IntentFilter filter = new IntentFilter(ACTION_USB_PERMISSION);
 				// ACTION_USB_DEVICE_ATTACHED never comes on some devices so it should not be added here
@@ -482,15 +483,18 @@ public final class USBMonitor {
 	 */
 	public synchronized boolean requestPermission(final UsbDevice device) {
 //		if (DEBUG) Log.v(TAG, "requestPermission:device=" + device);
+		Log.v(TAG, "requestPermission:device=" + device);
 		boolean result = false;
 		if (isRegistered()) {
 			if (device != null) {
 				if (mUsbManager.hasPermission(device)) {
 					// call onConnect if app already has permission
+					Log.v(TAG, "mUsbManager.hasPermission");
 					processConnect(device);
 				} else {
 					try {
 						// パーミッションがなければ要求する
+						Log.v(TAG, "mUsbManager.requestPermission");
 						mUsbManager.requestPermission(device, mPermissionIntent);
 					} catch (final Exception e) {
 						// Android5.1.xのGALAXY系でandroid.permission.sec.MDM_APP_MGMTという意味不明の例外生成するみたい
@@ -538,6 +542,8 @@ public final class USBMonitor {
 		public void onReceive(final Context context, final Intent intent) {
 			if (destroyed) return;
 			final String action = intent.getAction();
+			Log.v(TAG, "onReceive action:" + action);
+			Log.v(TAG, "onReceive ACTION_USB_PERMISSION:" + ACTION_USB_PERMISSION);
 			if (ACTION_USB_PERMISSION.equals(action)) {
 				// when received the result of requesting USB permission
 				synchronized (USBMonitor.this) {
@@ -545,18 +551,22 @@ public final class USBMonitor {
 					if (intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false)) {
 						if (device != null) {
 							// get permission, call onConnect
+							Log.v(TAG, "EXTRA_PERMISSION_GRANTED");
 							processConnect(device);
 						}
 					} else {
 						// failed to get permission
+						Log.v(TAG, "!EXTRA_PERMISSION_GRANTED");
 						processCancel(device);
 					}
 				}
 			} else if (UsbManager.ACTION_USB_DEVICE_ATTACHED.equals(action)) {
+				Log.v(TAG, "ACTION_USB_DEVICE_ATTACHED");
 				final UsbDevice device = intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
 				updatePermission(device, hasPermission(device));
 				processAttach(device);
 			} else if (UsbManager.ACTION_USB_DEVICE_DETACHED.equals(action)) {
+				Log.v(TAG, "ACTION_USB_DEVICE_DETACHED");
 				// when device removed
 				final UsbDevice device = intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
 				if (device != null) {

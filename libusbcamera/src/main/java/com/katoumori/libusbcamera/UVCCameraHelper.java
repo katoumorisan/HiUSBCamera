@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.SurfaceTexture;
 import android.hardware.usb.UsbDevice;
 import android.os.Environment;
+import android.util.Log;
 
 import com.serenegiant.usb.DeviceFilter;
 import com.serenegiant.usb.Size;
@@ -20,19 +21,19 @@ import java.io.File;
 import java.util.List;
 import java.util.Objects;
 
-/** UVCCamera Helper class
- *
- * Created by jiangdongguo on 2017/9/30.
- */
-
 public class UVCCameraHelper {
     public static final String ROOT_PATH = Environment.getExternalStorageDirectory().getAbsolutePath()
             + File.separator;
     public static final String SUFFIX_JPEG = ".jpg";
     public static final String SUFFIX_MP4 = ".mp4";
     private static final String TAG = "UVCCameraHelper";
-    private int previewWidth = 640;
-    private int previewHeight = 480;
+//    private int previewWidth = 640;
+//    private int previewHeight = 360;
+//    private int previewHeight = 480;
+
+    private int previewWidth = 1280;
+    private int previewHeight = 720;
+
     public static final int FRAME_FORMAT_YUYV = UVCCamera.FRAME_FORMAT_YUYV;
     // Default using MJPEG
     // if your device is connected,but have no images
@@ -218,12 +219,15 @@ public class UVCCameraHelper {
     public void requestPermission(int index) {
         List<UsbDevice> devList = getUsbDeviceList();
         if (devList == null || devList.size() == 0) {
+            Log.d(TAG, "requestPermission return1");
             return;
         }
+        Log.d(TAG, "requestPermission go1");
         int count = devList.size();
         if (index >= count)
             new IllegalArgumentException("index illegal,should be < devList.size()");
         if (mUSBMonitor != null) {
+            Log.d(TAG, "requestPermission go2");
             mUSBMonitor.requestPermission(getUsbDeviceList().get(index));
         }
     }
@@ -246,7 +250,7 @@ public class UVCCameraHelper {
         return mUSBMonitor.getDeviceList(deviceFilters);
     }
 
-    public void capturePicture(String savePath,AbstractUVCCameraHandler.OnCaptureListener listener) {
+    public void capturePicture(String savePath, AbstractUVCCameraHandler.OnCaptureListener listener) {
         if (mCameraHandler != null && mCameraHandler.isOpened()) {
 
             File file = new File(savePath);

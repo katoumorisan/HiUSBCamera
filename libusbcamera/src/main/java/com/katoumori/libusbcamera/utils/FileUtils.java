@@ -7,11 +7,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-/**
- *
- * Created by jiangdongguo on 2017/10/18.
- */
-
 public class FileUtils {
 
     private static BufferedOutputStream outputStream;

@@ -27,6 +27,8 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.TextureView;
 
+import com.serenegiant.widget.IAspectRatioView;
+
 /**
  * change the view size with keeping the specified aspect ratio.
  * if you set this view with in a FrameLayout and set property "android:layout_gravity="center",
