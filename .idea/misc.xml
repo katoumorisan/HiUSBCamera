@@ -3,9 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Android/repository/mine1/HiUSBCamera/app/src/main/res/layout/activity_main.xml" value="0.17708333333333334" />
+        <entry key="..\:/Android/repository/mine1/HiUSBCamera/app/src/main/res/layout/activity_main.xml" value="0.176" />
         <entry key="..\:/Android/repository/mine1/HiUSBCamera/app/src/main/res/layout/activity_splash.xml" value="0.17708333333333334" />
         <entry key="..\:/Android/repository/mine1/HiUSBCamera/app/src/main/res/layout/activity_usbcamera.xml" value="0.17708333333333334" />
+        <entry key="..\:/Android/repository/mine1/HiUSBCamera/app/src/main/res/layout/activity_usbcamera2.xml" value="0.10587639311043566" />
         <entry key="..\:/Android/repository/mine1/HiUSBCamera/app/src/main/res/layout/layout_dialog_list.xml" value="0.17708333333333334" />
         <entry key="..\:/Android/repository/mine1/HiUSBCamera/app/src/main/res/menu/main_toobar.xml" value="0.17708333333333334" />
       </map>
