@@ -14,6 +14,7 @@ import android.view.Surface;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.Switch;
@@ -31,6 +32,7 @@ import com.serenegiant.usb.USBMonitor;
 import com.serenegiant.usb.common.AbstractUVCCameraHandler;
 import com.serenegiant.usb.encoder.RecordParams;
 import com.serenegiant.usb.widget.CameraViewInterface;
+import com.serenegiant.usb.widget.UVCCameraTextureView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +46,7 @@ import java.util.List;
 
 public class USBCameraActivity extends AppCompatActivity implements CameraDialog.CameraDialogParent, CameraViewInterface.Callback {
     private static final String TAG = "Debug";
+    public FrameLayout mFrameLayout;
     public View mTextureView;
     public Toolbar mToolbar;
     public SeekBar mSeekBrightness;
@@ -122,6 +125,8 @@ public class USBCameraActivity extends AppCompatActivity implements CameraDialog
 //        ButterKnife.bind(this);
         initView();
 
+        mTextureView = new UVCCameraTextureView(this);
+//        mFrameLayout.addView(mTextureView);
         // step.1 initialize UVCCameraHelper
         mUVCCameraView = (CameraViewInterface) mTextureView;
         mUVCCameraView.setCallback(this);
@@ -138,7 +143,8 @@ public class USBCameraActivity extends AppCompatActivity implements CameraDialog
     }
 
     private void initView() {
-        mTextureView = findViewById(R.id.camera_view);
+        mFrameLayout = findViewById(R.id.flayout_camera);
+//        mTextureView = findViewById(R.id.camera_view);
         mToolbar = findViewById(R.id.toolbar);
         mSeekBrightness = findViewById(R.id.seekbar_brightness);
         mSeekContrast = findViewById(R.id.seekbar_contrast);
