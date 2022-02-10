@@ -95,7 +95,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(SplashActivity.this, USBCameraActivity.class));
+                startActivity(new Intent(SplashActivity.this, MainActivity.class));
                 SplashActivity.this.finish();
             }
         }, 3000);
