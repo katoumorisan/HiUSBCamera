@@ -14,6 +14,7 @@ import androidx.lifecycle.OnLifecycleEvent;
 
 import com.serenegiant.usb.common.AbstractUVCCameraHandler;
 import com.serenegiant.usb.widget.CameraViewInterface;
+import com.serenegiant.usb.widget.UVCCameraTextureView;
 
 public class UVCCameraFactory implements LifecycleObserver {
     private static final String TAG = UVCCameraFactory.class.getSimpleName();
@@ -42,6 +43,17 @@ public class UVCCameraFactory implements LifecycleObserver {
         mCameraHelper.setDefaultFrameFormat(UVCCameraHelper.FRAME_FORMAT_MJPEG);
         mCameraHelper.initUSBMonitor(activity, mUVCCameraView, listener);
 
+    }
+
+    public void init(AppCompatActivity activity) {
+        activity.getLifecycle().addObserver(mCameraFactory);
+        this.activity = activity;
+        mTextureView = new UVCCameraTextureView(activity);
+        mUVCCameraView = (CameraViewInterface) mTextureView;
+        mUVCCameraView.setCallback(callback);
+        mCameraHelper = UVCCameraHelper.getInstance();
+        mCameraHelper.setDefaultFrameFormat(UVCCameraHelper.FRAME_FORMAT_MJPEG);
+        mCameraHelper.initUSBMonitor(activity, mUVCCameraView, listener);
     }
 
     public void setOnPreviewFrameListener(AbstractUVCCameraHandler.OnPreViewResultListener mListner) {

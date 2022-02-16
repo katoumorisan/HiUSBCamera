@@ -324,7 +324,8 @@ public class UVCCameraHelper {
     }
 
     public void startPreview(CameraViewInterface cameraView) {
-        SurfaceTexture st = cameraView.getSurfaceTexture();
+//        SurfaceTexture st = cameraView.getSurfaceTexture();
+        SurfaceTexture st = cameraView.getSurfaceTexture() == null ? new SurfaceTexture(1) : cameraView.getSurfaceTexture();
         if (mCameraHandler != null) {
             mCameraHandler.startPreview(st);
         }
