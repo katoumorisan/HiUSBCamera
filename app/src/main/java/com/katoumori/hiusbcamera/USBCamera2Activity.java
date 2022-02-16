@@ -18,7 +18,8 @@ public class USBCamera2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_usbcamera2);
 
         mCameraFactory = UVCCameraFactory.getInstance();
-        mCameraFactory.init(this,R.id.camera_view2);
+//        mCameraFactory.init(this,R.id.camera_view2);
+        mCameraFactory.init(this);
         mCameraFactory.setOnPreviewFrameListener(new AbstractUVCCameraHandler.OnPreViewResultListener() {
             @Override
             public void onPreviewResult(byte[] data) {
