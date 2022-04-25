@@ -2,4 +2,5 @@
     <string name="app_name">HiUSBCamera</string>
     <string name="using1">方式一</string>
     <string name="using2">方式二</string>
+    <string name="checkConnect">checkConnect</string>
 </resources>

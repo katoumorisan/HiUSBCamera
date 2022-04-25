@@ -131,6 +131,13 @@ public final class USBMonitor {
 		if (DEBUG) Log.v(TAG, "USBMonitor:mUsbManager=" + mUsbManager);
 	}
 
+	public boolean isCameraConnect() {
+		if (getDeviceCount() > 0) {
+			return true;
+		}
+		return false;
+	}
+
 	/**
 	 * Release all related resources,
 	 * never reuse again

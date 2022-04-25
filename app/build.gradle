@@ -7,14 +7,14 @@ android {
 
     defaultConfig {
         applicationId "com.katoumori.hiusbcamera"
-//        minSdk 21
-//        targetSdk 30
-//        versionCode 1
-//        versionName "1.0"
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.versionTarget
-        versionCode rootProject.ext.versionCode
-        versionName rootProject.ext.versionNameString
+        minSdk 21
+        targetSdk 27
+        versionCode 1
+        versionName "1.0"
+//        minSdkVersion rootProject.ext.minSdkVersion
+//        targetSdkVersion rootProject.ext.versionTarget
+//        versionCode rootProject.ext.versionCode
+//        versionName rootProject.ext.versionNameString
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

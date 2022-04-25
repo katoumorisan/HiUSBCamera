@@ -1,5 +1,6 @@
 package com.katoumori.libusbcamera;
 
+import android.content.Context;
 import android.hardware.usb.UsbDevice;
 import android.os.Looper;
 import android.util.Log;
@@ -67,6 +68,13 @@ public class UVCCameraFactory implements LifecycleObserver {
                 mListner.onPreviewResult(nv21Yuv);
             }
         });
+    }
+
+    public boolean isHelmetCameraConnected(Context context) {
+        if(mCameraHelper != null) {
+            return mCameraHelper.isCameraConnect(context);
+        }
+        return false;
     }
 
     private UVCCameraHelper.OnMyDevConnectListener listener = new UVCCameraHelper.OnMyDevConnectListener() {

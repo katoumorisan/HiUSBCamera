@@ -1,6 +1,7 @@
 package com.katoumori.libusbcamera;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.SurfaceTexture;
 import android.hardware.usb.UsbDevice;
 import android.os.Environment;
@@ -77,6 +78,36 @@ public class UVCCameraHelper {
         void onConnectDev(UsbDevice device, boolean isConnected);
 
         void onDisConnectDev(UsbDevice device);
+    }
+
+    public boolean isCameraConnect(Context context) {
+        mUSBMonitor = new USBMonitor(context, new USBMonitor.OnDeviceConnectListener() {
+            @Override
+            public void onAttach(UsbDevice device) {
+
+            }
+
+            @Override
+            public void onDettach(UsbDevice device) {
+
+            }
+
+            @Override
+            public void onConnect(UsbDevice device, USBMonitor.UsbControlBlock ctrlBlock, boolean createNew) {
+
+            }
+
+            @Override
+            public void onDisconnect(UsbDevice device, USBMonitor.UsbControlBlock ctrlBlock) {
+
+            }
+
+            @Override
+            public void onCancel(UsbDevice device) {
+
+            }
+        });
+        return mUSBMonitor.isCameraConnect();
     }
 
     public void initUSBMonitor(Activity activity, CameraViewInterface cameraView, final OnMyDevConnectListener listener) {
@@ -358,7 +389,10 @@ public class UVCCameraHelper {
     }
 
     public void setDefaultFrameFormat(int format) {
-        if(mUSBMonitor != null) {
+//        if(mUSBMonitor != null) {
+//            throw new IllegalStateException("setDefaultFrameFormat should be call before initMonitor");
+//        }
+        if(mCameraHandler != null) {
             throw new IllegalStateException("setDefaultFrameFormat should be call before initMonitor");
         }
         this.mFrameFormat = format;
