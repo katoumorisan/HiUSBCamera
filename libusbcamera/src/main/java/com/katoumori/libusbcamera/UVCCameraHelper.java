@@ -81,32 +81,34 @@ public class UVCCameraHelper {
     }
 
     public boolean isCameraConnect(Context context) {
-        mUSBMonitor = new USBMonitor(context, new USBMonitor.OnDeviceConnectListener() {
-            @Override
-            public void onAttach(UsbDevice device) {
+        if (mUSBMonitor == null) {
+            mUSBMonitor = new USBMonitor(context, new USBMonitor.OnDeviceConnectListener() {
+                @Override
+                public void onAttach(UsbDevice device) {
 
-            }
+                }
 
-            @Override
-            public void onDettach(UsbDevice device) {
+                @Override
+                public void onDettach(UsbDevice device) {
 
-            }
+                }
 
-            @Override
-            public void onConnect(UsbDevice device, USBMonitor.UsbControlBlock ctrlBlock, boolean createNew) {
+                @Override
+                public void onConnect(UsbDevice device, USBMonitor.UsbControlBlock ctrlBlock, boolean createNew) {
 
-            }
+                }
 
-            @Override
-            public void onDisconnect(UsbDevice device, USBMonitor.UsbControlBlock ctrlBlock) {
+                @Override
+                public void onDisconnect(UsbDevice device, USBMonitor.UsbControlBlock ctrlBlock) {
 
-            }
+                }
 
-            @Override
-            public void onCancel(UsbDevice device) {
+                @Override
+                public void onCancel(UsbDevice device) {
 
-            }
-        });
+                }
+            });
+        }
         return mUSBMonitor.isCameraConnect();
     }
 
