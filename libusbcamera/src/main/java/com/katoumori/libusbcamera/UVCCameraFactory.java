@@ -71,10 +71,14 @@ public class UVCCameraFactory implements LifecycleObserver {
     }
 
     public boolean isHelmetCameraConnected(Context context) {
-        if(mCameraHelper != null) {
-            return mCameraHelper.isCameraConnect(context);
-        }
-        return false;
+        return UVCCameraHelper.getInstance().isCameraConnect(context);
+    }
+
+    public boolean updateResolution(int width, int height) {
+        if (mCameraHelper == null || !mCameraHelper.isCameraOpened())
+            return false;
+        mCameraHelper.updateResolution(width, height);
+        return true;
     }
 
     private UVCCameraHelper.OnMyDevConnectListener listener = new UVCCameraHelper.OnMyDevConnectListener() {
