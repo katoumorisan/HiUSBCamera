@@ -80,6 +80,10 @@ public class UVCCameraFactory implements LifecycleObserver {
         return mCameraHelper;
     }
 
+    public View getView() {
+        return mTextureView;
+    }
+
     public boolean isHelmetCameraConnected(Context context) {
         return UVCCameraHelper.getInstance().isCameraConnect(context);
     }
