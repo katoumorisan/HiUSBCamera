@@ -34,6 +34,7 @@ public interface CameraViewInterface extends IAspectRatioView2 {
 		public void onSurfaceCreated(CameraViewInterface view, Surface surface);
 		public void onSurfaceChanged(CameraViewInterface view, Surface surface, int width, int height);
 		public void onSurfaceDestroy(CameraViewInterface view, Surface surface);
+		public void onSurfaceUpdate(Surface surface);
 	}
 	public void onPause();
 	public void onResume();

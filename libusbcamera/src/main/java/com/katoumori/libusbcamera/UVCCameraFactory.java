@@ -26,6 +26,7 @@ public class UVCCameraFactory implements LifecycleObserver {
     private CameraViewInterface mUVCCameraView;
     private boolean isRequest;
     private boolean isPreview;
+    private ISurfaceCallback surfaceCallback;
 
     public static UVCCameraFactory getInstance() {
         if (mCameraFactory == null) {
@@ -43,6 +44,9 @@ public class UVCCameraFactory implements LifecycleObserver {
         mCameraHelper = UVCCameraHelper.getInstance();
         mCameraHelper.setDefaultFrameFormat(UVCCameraHelper.FRAME_FORMAT_MJPEG);
         mCameraHelper.initUSBMonitor(activity, mUVCCameraView, listener);
+//        mCameraHelper.updateResolution(640, 360);
+        mCameraHelper.updateResolution(1920, 1080);
+        isRequest = false;
 
     }
 
@@ -55,6 +59,8 @@ public class UVCCameraFactory implements LifecycleObserver {
         mCameraHelper = UVCCameraHelper.getInstance();
         mCameraHelper.setDefaultFrameFormat(UVCCameraHelper.FRAME_FORMAT_MJPEG);
         mCameraHelper.initUSBMonitor(activity, mUVCCameraView, listener);
+        mCameraHelper.updateResolution(1920, 1080);
+        isRequest = false;
     }
 
     public void setOnPreviewFrameListener(AbstractUVCCameraHandler.OnPreViewResultListener mListner) {
@@ -68,6 +74,10 @@ public class UVCCameraFactory implements LifecycleObserver {
                 mListner.onPreviewResult(nv21Yuv);
             }
         });
+    }
+
+    public UVCCameraHelper getmCameraHelper() {
+        return mCameraHelper;
     }
 
     public boolean isHelmetCameraConnected(Context context) {
@@ -143,7 +153,18 @@ public class UVCCameraFactory implements LifecycleObserver {
                 isPreview = false;
             }
         }
+
+        @Override
+        public void onSurfaceUpdate(Surface surface) {
+            if (surfaceCallback != null) {
+                surfaceCallback.onSurfaceUpdated(surface);
+            }
+        }
     };
+
+    public void onSurfaceUpdated(ISurfaceCallback callback) {
+        surfaceCallback = callback;
+    }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     public void onStart() {

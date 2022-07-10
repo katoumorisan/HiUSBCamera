@@ -155,6 +155,7 @@ public class UVCCameraTextureView extends AspectRatioTextureView    // API >= 14
 				mCaptureSync.notifyAll();
 			}
 		}
+		mCallback.onSurfaceUpdate(getSurface());
 	}
 
 	@Override
