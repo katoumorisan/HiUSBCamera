@@ -399,4 +399,9 @@ public class USBCameraActivity extends AppCompatActivity implements CameraDialog
             isPreview = false;
         }
     }
+
+    @Override
+    public void onSurfaceUpdate(Surface surface) {
+
+    }
 }
